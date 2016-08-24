@@ -126,6 +126,7 @@ export default React.createClass({
     monthLabels: React.PropTypes.array,
     onChange: React.PropTypes.func,
     onClear: React.PropTypes.func,
+    disabled: React.PropTypes.bool,
     clearButtonElement: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object
@@ -420,6 +421,7 @@ export default React.createClass({
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onChange={this.handleInputChange}
+        disabled={this.props.disabled ? this.props.disabled : false}
       />
       <InputGroup.Addon onClick={this.clear} style={{cursor:this.state.inputValue ? "pointer" : "not-allowed"}}>{this.props.clearButtonElement}</InputGroup.Addon>
     </InputGroup>;

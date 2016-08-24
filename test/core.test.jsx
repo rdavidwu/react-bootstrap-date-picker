@@ -384,4 +384,24 @@ describe("Date Picker", function() {
     assert.equal(yyyy_mm_dd_inputElement.value, "1999/12/31");
     ReactDOM.unmountComponentAtNode(container);
   }));
+  it("should be disabled", co.wrap(function *(){
+    const id = UUID.v4();
+    const value = new Date('2010-05-02').toISOString();;
+    const App = React.createClass({
+      render: function(){
+        return <div>
+          <DatePicker id={id} value={value} disabled={true} />
+        </div>;
+      }
+    });
+    yield new Promise(function(resolve, reject){
+      ReactDOM.render(<App />, container, resolve);
+    });
+    const inputElement = document.querySelector("input.form-control");
+    assert.ok(inputElement.disabled);
+    TestUtils.Simulate.click(inputElement);
+    const dayElement = document.querySelector("table tbody tr:nth-child(5) td:nth-of-type(2)");
+    assert.equal(dayElement, null);
+    ReactDOM.unmountComponentAtNode(container);
+  }));
 });
